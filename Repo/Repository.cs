@@ -9,12 +9,12 @@ namespace Repo
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly AppDbContext _context;
-        private DbSet<T> _entities;
+        private readonly AppDbContext context;
+        private DbSet<T> entities;
         public Repository(AppDbContext context)
         {
-            this._context = context;
-            this._entities = context.Set<T>();
+            this.context = context;
+            this.entities = context.Set<T>();
         }
         public void Delete(T entity)
         {
@@ -24,19 +24,19 @@ namespace Repo
             }
             else
             {
-                _entities.Remove(entity);
-                _context.SaveChanges();
+                entities.Remove(entity);
+                context.SaveChanges();
             }
         }
 
         public T Get(int id)
         {
-            return _entities.SingleOrDefault(entity => entity.Id == id);
+            return entities.SingleOrDefault(entity => entity.Id == id);
         }
 
         public IEnumerable<T> GetAll()
         {
-            return _entities.AsEnumerable();
+            return entities.AsEnumerable();
         }
 
         public void Insert(T entity)
@@ -47,8 +47,8 @@ namespace Repo
             }
             else 
             {
-                _entities.Add(entity);
-                _context.SaveChanges();
+                entities.Add(entity);
+                context.SaveChanges();
             }
         }
 
@@ -60,13 +60,13 @@ namespace Repo
             }
             else
             {
-                _context.Remove(entity);
+                context.Remove(entity);
             }
         }
 
         public void SaveChanges()
         {
-            _context.SaveChanges();
+            context.SaveChanges();
         }
 
         public void Update(T entity)
@@ -77,8 +77,8 @@ namespace Repo
             }
             else
             {
-                _entities.Update(entity);
-                _context.SaveChanges();
+                entities.Update(entity);
+                context.SaveChanges();
             }
         }
     }
