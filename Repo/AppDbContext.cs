@@ -22,5 +22,9 @@ namespace Repo
 
             base.OnModelCreating(modelBuilder);
         }
+        public DbSet<User> User { get; set; }
+        public DbSet<UserProfile> UserProfile { get; set; }
+
+
     }
 }
